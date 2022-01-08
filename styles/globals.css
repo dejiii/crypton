@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #131313;
+  /* background-color: #131313; */
 }
 
 a {
@@ -15,3 +15,83 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.more-info-button {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #111;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.crypton-search-bar {
+  padding: 10px;
+  border-radius: 3px;
+}
+
+table {
+  width: 100%;
+  border: 2px solid #ddd;
+  margin-bottom: 40px;
+}
+
+table th {
+  text-align: left;
+  background-color: #ddd;
+  padding: 0.5em 0.5em;
+}
+
+table td {
+  padding: 0.5em 0.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:last-child {
+  border-bottom: 10px solid #f00 !important;
+}
+
+.crypton-table {
+  display: block;
+}
+
+.crypton-banner {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .crypton-table {
+    display: none;
+  }
+  .crypton-banner {
+    display: block;
+  }
+}
+
+/* 
+import { Coin } from "..";
+
+export const Table = () => {
+  return (
+    <div>
+      <h1>CRYPTON TABLE</h1>
+      <div className="display">
+        <table className="crypton-table">
+          <th>Month</th>
+          <th>Savings</th>
+          <th>Savings</th>
+          <th>Savings</th>
+          <th>Savings</th>
+          <th>Savings</th>
+          <th>Savings</th>
+          <th></th>
+          <Coin />
+          <Coin />
+          <Coin />
+          <Coin />
+          <Coin />
+        </table>
+        <div className="crypton-banner">Display on Large screen</div>
+      </div>
+    </div>
+  );
+}; */
