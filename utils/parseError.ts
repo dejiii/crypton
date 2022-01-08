@@ -1,4 +1,4 @@
-export const parseError = (error: unknown): string => {
+export const parseError = (error: any): string => {
   if (error) {
     if (typeof error?.message === "string") {
       return error.message;
