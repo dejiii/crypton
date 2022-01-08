@@ -7,7 +7,7 @@ import Loading from "../../public/loading.json";
 import Error from "../../public/error.json";
 export const useTableHelper = () => {
   const [coins, setCoins] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [coinInfo, setCoinInfo] = useState<CoinType | undefined>(undefined);
 

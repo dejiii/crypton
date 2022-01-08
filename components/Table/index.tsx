@@ -22,7 +22,6 @@ export const Table = () => {
     handleClick,
     handleClose,
   } = useTableHelper();
-  console.log(coinInfo);
 
   if (isLoading) {
     return (
