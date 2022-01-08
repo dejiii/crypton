@@ -1,61 +1,28 @@
+import React, { useState, useEffect } from "react";
+
 import axios from "axios";
 import Lottie from "react-lottie";
-import PureModal from "react-pure-modal";
-import "react-pure-modal/dist/react-pure-modal.min.css";
-
-import Loading from "../../public/loading.json";
-import Error from "../../public/error.json";
-
-import React, { useState, useEffect } from "react";
 
 import { Coin } from "..";
 import { parseError } from "../../utils/parseError";
 
+import { Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useTableHelper } from "./useTableHelper";
+
 export const Table = () => {
-  const [coins, setCoins] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState<unknown>();
-  const [isModalVisible, setModalVisibility] = useState(false);
-
-  //   const passedCoinName = useContext(coinPassed);
-  console.log(error);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: Loading,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-
-  const errorOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: Error,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-
-  const fetchCoins = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        "https://api.coinpaper.io/v1/coins/overview"
-      );
-      setCoins(response.data);
-    } catch (error) {
-      const message = parseError(error);
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCoins();
-  }, []);
+  const {
+    coins,
+    isLoading,
+    error,
+    coinInfo,
+    show,
+    defaultOptions,
+    errorOptions,
+    handleClick,
+    handleClose,
+  } = useTableHelper();
+  console.log(coinInfo);
 
   if (isLoading) {
     return (
@@ -98,182 +65,21 @@ export const Table = () => {
                 price={price}
                 volume={volume}
                 coinIndex={`${coinIndex + 1}`}
-                setModalVisibility={setModalVisibility}
+                handleClick={handleClick}
               />
             ))}
           </tbody>
         </table>
-        <PureModal
-          header="Coin Data"
-          isOpen={isModalVisible}
-          // closeButton="close"
-          width="70%"
-          portal
-          // closeButtonPosition="bottom"
-          closeButtonPosition="header"
-          onClose={() => {
-            setModalVisibility(false);
-            return true;
-          }}
-        >
-          <p>Your content goes here</p>
-          <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            pariatur aspernatur ullam ea iusto, neque ratione iste eaque nulla,
-            explicabo voluptatum magnam praesentium dolorem fugiat dicta vero
-            laudantium autem sapiente. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quibusdam pariatur aspernatur ullam ea iusto,
-            neque ratione iste eaque nulla, explicabo voluptatum magnam
-            praesentium dolorem fugiat dicta vero laudantium autem sapiente.
-          </div>
-        </PureModal>
+        {coinInfo ? (
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{coinInfo.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Volume: {coinInfo.volume}</p>
+            </Modal.Body>
+          </Modal>
+        ) : null}
       </div>
     </div>
   );

@@ -46,10 +46,6 @@ table td {
   border-bottom: 1px solid #ddd;
 }
 
-table tr:last-child {
-  border-bottom: 10px solid #f00 !important;
-}
-
 .crypton-table {
   display: block;
 }
@@ -66,32 +62,3 @@ table tr:last-child {
     display: block;
   }
 }
-
-/* 
-import { Coin } from "..";
-
-export const Table = () => {
-  return (
-    <div>
-      <h1>CRYPTON TABLE</h1>
-      <div className="display">
-        <table className="crypton-table">
-          <th>Month</th>
-          <th>Savings</th>
-          <th>Savings</th>
-          <th>Savings</th>
-          <th>Savings</th>
-          <th>Savings</th>
-          <th>Savings</th>
-          <th></th>
-          <Coin />
-          <Coin />
-          <Coin />
-          <Coin />
-          <Coin />
-        </table>
-        <div className="crypton-banner">Display on Large screen</div>
-      </div>
-    </div>
-  );
-}; */

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Table } from "../components";
+import { SearchBar, Table } from "../components";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -14,6 +14,7 @@ const Home: NextPage = () => {
 
       <main>
         <p>Crypton Table</p>
+        <SearchBar />
         <Table />
       </main>
     </div>

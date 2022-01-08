@@ -5,7 +5,8 @@ type CoinProps = {
   price: number;
   volume: number;
   coinIndex: string;
-  setModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  handleClick: (id: string) => void;
+  // setModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const Coin = ({
@@ -15,12 +16,9 @@ export const Coin = ({
   price,
   volume,
   coinIndex,
-  setModalVisibility,
-}: CoinProps) => {
-  const handleClick = () => {
-    setModalVisibility(true);
-  };
-
+  handleClick,
+}: // setModalVisibility,
+CoinProps) => {
   return (
     <tr>
       <td>{coinIndex}</td>
@@ -29,8 +27,8 @@ export const Coin = ({
       <td>$ {price.toLocaleString()}</td>
       <td>{volume.toLocaleString()}</td>
       <td>
-        <button className="more-info-button" onClick={handleClick}>
-          More Info on {name}
+        <button className="more-info-button" onClick={() => handleClick(id)}>
+          Read more on {name}
         </button>
       </td>
     </tr>
