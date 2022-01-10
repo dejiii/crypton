@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 
-import axios from "axios";
 import Lottie from "react-lottie";
 
 import { Coin } from "..";
-import { parseError } from "../../utils/parseError";
 
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useTableHelper } from "./useTableHelper";
+
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 export const Table = () => {
   const {
@@ -17,6 +26,7 @@ export const Table = () => {
     error,
     coinInfo,
     show,
+    warningOption,
     defaultOptions,
     errorOptions,
     handleClick,
@@ -41,7 +51,12 @@ export const Table = () => {
 
   return (
     <div>
-      <div className="crypton-banner">Use a bigger screen size</div>
+      <div className="crypton-banner">
+        <p className="text-center">
+          Use a bigger Screen size for best experience
+        </p>
+        <Lottie options={warningOption} height={200} width={200} />
+      </div>
       <div className="crypton-table">
         <table>
           <thead>
@@ -49,24 +64,33 @@ export const Table = () => {
               <th>S/N</th>
               <th>Name</th>
               <th>Symbol</th>
+              <th>Rank</th>
+              <th>Market Cap</th>
               <th>Price</th>
               <th>Volume</th>
-              <th>More</th>
+              <th>Links</th>
             </tr>
           </thead>
           <tbody>
-            {coins.map(({ id, name, symbol, price, volume }, coinIndex) => (
-              <Coin
-                key={id}
-                id={id}
-                name={name}
-                symbol={symbol}
-                price={price}
-                volume={volume}
-                coinIndex={`${coinIndex + 1}`}
-                handleClick={handleClick}
-              />
-            ))}
+            {coins.map(
+              (
+                { id, name, symbol, rank, market_cap, price, volume },
+                coinIndex
+              ) => (
+                <Coin
+                  key={id}
+                  id={id}
+                  name={name}
+                  symbol={symbol}
+                  rank={rank}
+                  market_cap={market_cap}
+                  price={price}
+                  volume={volume}
+                  coinIndex={`${coinIndex + 1}`}
+                  handleClick={handleClick}
+                />
+              )
+            )}
           </tbody>
         </table>
         {coinInfo ? (
@@ -75,7 +99,25 @@ export const Table = () => {
               <Modal.Title>{coinInfo.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <p>Volume: {coinInfo.volume}</p>
+              <h4>{coinInfo.volume.toLocaleString()}</h4>
+              <span>Volume</span>
+
+              <div>Percentage Price Change</div>
+              <div className="mt-4 d-flex w-100">
+                <span className="modal-coin-stats">
+                  <h5>{coinInfo.price_1h_percentage_change}</h5>
+                  <p>Last 1h</p>
+                </span>
+                <span className="modal-coin-stats">
+                  <h5>{coinInfo.price_24h_percentage_change}</h5>
+                  <p>Last 24hrs</p>
+                </span>
+                <span className="modal-coin-stats">
+                  <h5>{coinInfo.price_24h_percentage_change}</h5>
+                  <p>Last 7d</p>
+                </span>
+              </div>
+              <div></div>
             </Modal.Body>
           </Modal>
         ) : null}

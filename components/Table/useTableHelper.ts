@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 import { Coin as CoinType } from "../../models/coin.model";
 import { parseError } from "../../utils/parseError";
 
 import Loading from "../../public/loading.json";
 import Error from "../../public/error.json";
+import Warning from "../../public/warning.json";
+
 export const useTableHelper = () => {
   const [coins, setCoins] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -27,6 +30,15 @@ export const useTableHelper = () => {
     loop: true,
     autoplay: true,
     animationData: Error,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const warningOption = {
+    loop: true,
+    autoplay: true,
+    animationData: Warning,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -66,6 +78,7 @@ export const useTableHelper = () => {
     coinInfo,
     show,
     defaultOptions,
+    warningOption,
     errorOptions,
     handleClick,
     handleClose,

@@ -2,9 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  /* background-color: #131313; */
+  font-family: "Inter", sans-serif;
+  user-select: none;
 }
 
 a {
@@ -16,17 +15,69 @@ a {
   box-sizing: border-box;
 }
 
+.w-100 {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+nav {
+  width: 100%;
+  background-color: #354cfa;
+  padding: 10px 0;
+  margin-bottom: 3em;
+}
+
+.mt-4 {
+  marign-top: 40px;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.nav-title {
+  color: #fff;
+  font-size: 1.5em;
+  padding: 0.5em;
+  font-weight: bold;
+}
+
 .more-info-button {
   cursor: pointer;
-  padding: 10px;
-  background-color: #111;
-  color: #fff;
+  padding: 0.5em;
+  background-color: #ffd200;
+  color: #333;
+  font-size: 0.8em;
+  border: 0;
+  outline: none;
   border-radius: 3px;
+}
+
+.crypton-search-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
 .crypton-search-bar {
   padding: 10px;
   border-radius: 3px;
+  width: 400px;
+  border: 2px solid #ddd;
+}
+
+.crypton-search-bar:focus {
+  color: #133;
+  outline: none;
 }
 
 table {
@@ -54,11 +105,20 @@ table td {
   display: none;
 }
 
+.modal-coin-stats {
+  background-color: #ddd;
+  text-align: center;
+  width: 150px;
+}
+
 @media screen and (max-width: 1000px) {
   .crypton-table {
     display: none;
   }
   .crypton-banner {
     display: block;
+  }
+  .crypton-search-bar {
+    display: none;
   }
 }

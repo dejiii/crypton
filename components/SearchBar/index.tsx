@@ -9,15 +9,15 @@ export const SearchBar = () => {
   // };
 
   return (
-    <>
+    <section className="crypton-search-wrapper">
       <form>
         <input
           className="crypton-search-bar"
-          placeholder="Search"
+          placeholder="Search name"
           // onChange={handleChange}
         />
       </form>
       <div></div>
-    </>
+    </section>
   );
 };

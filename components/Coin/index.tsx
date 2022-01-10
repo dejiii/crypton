@@ -2,6 +2,8 @@ type CoinProps = {
   id: string;
   name: string;
   symbol: string;
+  rank: number;
+  market_cap: number;
   price: number;
   volume: number;
   coinIndex: string;
@@ -13,6 +15,8 @@ export const Coin = ({
   id,
   name,
   symbol,
+  rank,
+  market_cap,
   price,
   volume,
   coinIndex,
@@ -24,11 +28,13 @@ CoinProps) => {
       <td>{coinIndex}</td>
       <td>{name}</td>
       <td>{symbol}</td>
+      <td>{rank}</td>
+      <td>{market_cap.toLocaleString()}</td>
       <td>$ {price.toLocaleString()}</td>
       <td>{volume.toLocaleString()}</td>
       <td>
         <button className="more-info-button" onClick={() => handleClick(id)}>
-          Read more on {name}
+          More info {">>"}
         </button>
       </td>
     </tr>
