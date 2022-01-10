@@ -13,7 +13,6 @@ export const useTableHelper = () => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [coinInfo, setCoinInfo] = useState<CoinType | undefined>(undefined);
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
